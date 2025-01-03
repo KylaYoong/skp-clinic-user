@@ -1,0 +1,105 @@
+@media (min-width: 768px) {
+    body {
+        font-size: 18px;
+        background-color: lightblue; /* Test Change */
+    }
+}
+
+@media (min-width: 768px) {
+    .register-page .content {
+        flex-direction: row;
+        justify-content: space-around;
+    }
+}
+
+/* Universal reset */
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+    font-family: Arial, sans-serif;
+}
+
+/* Overall page container */
+.register-page .overall {
+    height: 100vh;
+    display: flex;
+    flex-direction: column;
+    background-color: #ffffff;
+}
+
+/* Header section */
+.register-page .register-header {
+    width: 100%;
+    display: flex;
+    align-items: center;
+    padding: 10px 15px;
+    background-color: #ffffff;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.3);
+}
+
+.register-page .logo {
+    height: 60px !important;
+    width: 200px !important;
+    max-height: 100%;
+}
+
+/* Registration page layout */
+.register-page .content {
+    flex: 1;
+    display: flex;
+    justify-content: center;
+    align-items: flex-start;
+    background-color: #f4f4f4;
+    padding-top: 80px;
+}
+
+/* Main form container */
+.register-page .container {
+    background-color: #fff;
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0 0 30px rgba(0, 0, 0, 0.1);
+    width: 100%;
+    max-width: 400px;
+    margin-top: 0;
+    
+}
+
+.register-page h2 {
+    margin-bottom: 20px;
+    text-align: center;
+}
+
+.register-page .form-group {
+    margin-bottom: 15px;
+}
+
+.register-page label {
+    display: block;
+    margin-bottom: 5px;
+}
+
+.register-page input {
+    width: 100%;
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+}
+
+.register-page button {
+    width: 100%;
+    padding: 10px;
+    background-color: #28a745;
+    color: #fff;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    font-size: 16px;
+}
+
+.register-page button:hover {
+    background-color: #218838;
+}
+
+

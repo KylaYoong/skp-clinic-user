@@ -1,0 +1,88 @@
+/* Universal reset */
+.queue-status-page * {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+    font-family: Arial, sans-serif;
+  }
+  
+  /* Page container */
+  .queue-status-page {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    height: 100vh;
+    background-color: #f9f9f9;
+    text-align: center;
+  }
+  
+  .queue-status-container {
+    width: 400px;
+    max-width: 1200px;
+    background-color: #ffffff;
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+    text-align: center;
+    /* Dynamically adjust height */
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    height: auto; /* Remove fixed height */
+  }
+  
+  /* Title */
+  .queue-status-container h1 {
+    font-size: 24px;
+    color: #333;
+    margin-bottom: 20px;
+  }
+  
+  /* Current ticket card */
+  /* Flexbox for date and time alignment */
+  .date-time {
+    display: flex;
+    justify-content: space-between;
+    margin-top: 20px;
+    font-size: 20px;
+    font-weight: bold;
+    color: #000000;
+  }
+  
+  /* Flex container for ticket card */
+  .ticket-details {
+    display: flex;
+    justify-content: center;
+    margin-bottom: 20px;
+  }
+  
+  .current-serving-card {
+    background-color: #4CAF50; /* Green background */
+    color: #fff;
+    padding: 40px;
+    border-radius: 8px;
+    font-size: 56px;
+    font-weight: bold;
+    text-align: center;
+    min-width: 300px; /* Ensure proper size for the ticket */
+  }
+  
+  
+  /* Message below the ticket number */
+  .queue-status-container p {
+    font-size: 16px;
+    color: #666;
+    /* margin-top: 10px; */
+  }
+  
+  .current-serving {
+    text-align: center;
+  }
+  
+  .current-serving p {
+    font-size: 18px;
+    color: #333;
+    margin-bottom: 10px;
+  }
+  
