@@ -36,7 +36,7 @@
   .queue-status-container h1 {
     font-size: 24px;
     color: #333;
-    margin-bottom: 20px;
+    margin-bottom: 14px;
   }
   
   /* Current ticket card */
@@ -60,9 +60,9 @@
   .current-serving-card {
     background-color: #4CAF50; /* Green background */
     color: #fff;
-    padding: 40px;
+    padding: 26px;
     border-radius: 8px;
-    font-size: 56px;
+    font-size: 66px;
     font-weight: bold;
     text-align: center;
     min-width: 300px; /* Ensure proper size for the ticket */

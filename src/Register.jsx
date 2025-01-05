@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { db } from "./firebase-config";
-import { collection, doc, setDoc, Timestamp, query, getDocs, where } from "firebase/firestore"; // Ensure 'where' is imported
+import { collection, doc, setDoc, Timestamp, query, getDocs, where } from "firebase/firestore";
 import { useNavigate } from "react-router-dom";
 import "./Register.css";
 
@@ -11,58 +11,38 @@ const Register = () => {
   const handleSubmit = async (e) => {
     e.preventDefault();
 
-    if (!id.match(/^\d{6}$/)) {
-      alert("Employee ID must be exactly 6 digits!");
-      return;
-    }
-
     try {
-      // Validate Employee ID
+      // Verify Employee ID exists in the employees collection
       const employeesCollection = collection(db, "employees");
-      const employeeSnapshot = await getDocs(query(employeesCollection, where("empID", "==", id)));
-
-      console.log("Employee Snapshot: ", employeeSnapshot); // Debugging log
+      const employeeSnapshot = await getDocs(query(employeesCollection, where("employeeID", "==", id)));
 
       if (employeeSnapshot.empty) {
-        alert("Invalid Employee ID! Please enter a valid ID.");
+        alert("Invalid Employee ID! You are not a verified employee.");
         return;
       }
 
-      // Retrieve employee data (if necessary)
-      const employeeData = employeeSnapshot.docs[0].data();
-      console.log("Employee Data Retrieved: ", employeeData);
-
-      // Process registration if validation is successful
+      // Queue management
       const queueCollection = collection(db, "queueMeta");
       const queueSnapshot = await getDocs(queueCollection);
 
       let queueNumber;
-      let lastResetDate;
 
       if (!queueSnapshot.empty) {
         const queueData = queueSnapshot.docs[0].data();
-
-        lastResetDate =
-          queueData.lastResetDate && typeof queueData.lastResetDate.toDate === "function"
-            ? queueData.lastResetDate.toDate()
-            : new Date(0);
-
         const today = new Date().setHours(0, 0, 0, 0);
-        if (today !== lastResetDate.setHours(0, 0, 0, 0)) {
+        const lastResetDate = queueData.lastResetDate?.toDate()?.setHours(0, 0, 0, 0) || 0;
+
+        if (today !== lastResetDate) {
           // Reset queue number for a new day
-          queueNumber = "S5-01";
+          queueNumber = "001";
           await setDoc(queueSnapshot.docs[0].ref, {
             queueNumber,
             lastResetDate: Timestamp.fromDate(new Date()),
           });
         } else {
           // Increment queue number for the current day
-          const lastQueueNumber =
-            queueData.queueNumber && queueData.queueNumber.startsWith("S5-")
-              ? parseInt(queueData.queueNumber.slice(3), 10)
-              : 0;
-
-          queueNumber = `S5-${String(lastQueueNumber + 1).padStart(2, "0")}`;
+          const lastQueueNumber = parseInt(queueData.queueNumber, 10) || 0;
+          queueNumber = String(lastQueueNumber + 1).padStart(3, "0");
           await setDoc(queueSnapshot.docs[0].ref, {
             ...queueData,
             queueNumber,
@@ -70,13 +50,14 @@ const Register = () => {
         }
       } else {
         // Initialize queue number if none exists
-        queueNumber = "S5-01";
+        queueNumber = "001";
         await setDoc(doc(queueCollection, "queueMeta"), {
           queueNumber,
           lastResetDate: Timestamp.fromDate(new Date()),
         });
       }
 
+      // Add to the queue collection
       const userRef = doc(collection(db, "queue"), id);
       await setDoc(userRef, {
         employeeID: id,
@@ -85,8 +66,8 @@ const Register = () => {
         timestamp: Timestamp.now(),
       });
 
+      // Store employeeID in localStorage
       localStorage.setItem("employeeID", id);
-      console.log("Updated Firestore with:", { employeeID: id, queueNumber });
 
       alert(`Your queue number is ${queueNumber}`);
       setId("");

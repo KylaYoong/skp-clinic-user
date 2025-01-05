@@ -1,11 +1,12 @@
 import React, { useEffect, useState } from "react";
-import { collection, query, where, getDocs, doc } from "firebase/firestore";
+import { collection, query, where, getDocs } from "firebase/firestore";
 import { db } from "./firebase-config";
 import "./QueueStatus.css";
 
 const QueueStatus = () => {
-  const [queueNumber, setQueueNumber] = useState("");
-  const [currentServing, setCurrentServing] = useState("");
+  const [queueNumber, setQueueNumber] = useState("N/A");
+  const [currentServing, setCurrentServing] = useState("None");
+  const [peopleAhead, setPeopleAhead] = useState(0);
   const [loading, setLoading] = useState(true);
   const [date, setDate] = useState("");
   const [time, setTime] = useState("");
@@ -17,12 +18,23 @@ const QueueStatus = () => {
 
         // Get the employee ID from localStorage
         const userID = localStorage.getItem("employeeID");
-        if (!userID) throw new Error("User not registered!");
+        console.log("Fetched employeeID from localStorage:", userID);
+
+        if (!userID) {
+          console.error("No employee ID found in localStorage.");
+          setQueueNumber("N/A");
+          setCurrentServing("None");
+          setPeopleAhead(0);
+          setLoading(false);
+          return;
+        }
 
         // Fetch user queue details
         const queueRef = collection(db, "queue");
         const userQuery = query(queueRef, where("employeeID", "==", userID));
-        const userSnapshot = await getDocs(userQuery, { source: "server" });
+        const userSnapshot = await getDocs(userQuery);
+
+        console.log("Queue data for employee:", userSnapshot.docs.map(doc => doc.data()));
 
         if (!userSnapshot.empty) {
           const userData = userSnapshot.docs[0].data();
@@ -36,8 +48,15 @@ const QueueStatus = () => {
             setDate("No Date");
             setTime("No Time");
           }
+
+          // Fetch the people ahead in the queue
+          const peopleAheadQuery = query(queueRef, where("queueNumber", "<", userData.queueNumber));
+          const peopleAheadSnapshot = await getDocs(peopleAheadQuery);
+          setPeopleAhead(peopleAheadSnapshot.size);
         } else {
+          console.warn("No queue data found for employee ID:", userID);
           setQueueNumber("N/A");
+          setPeopleAhead(0);
         }
 
         // Query the queue collection for the current serving entry
@@ -46,14 +65,15 @@ const QueueStatus = () => {
 
         if (!currentServingSnapshot.empty) {
           const currentServingData = currentServingSnapshot.docs[0].data();
-          setCurrentServing(currentServingData.queueNumber || "No one is currently being served");
+          setCurrentServing(currentServingData.queueNumber || "None");
         } else {
-          setCurrentServing("No one is currently being served");
+          setCurrentServing("None");
         }
       } catch (error) {
         console.error("Error fetching queue status:", error);
         setQueueNumber("Error");
         setCurrentServing("Error");
+        setPeopleAhead(0);
       } finally {
         setLoading(false);
       }
@@ -75,6 +95,8 @@ const QueueStatus = () => {
             </div>
             <div className="current-serving">
               <p>Current Serving: {currentServing}</p>
+              <p>There are <strong>{peopleAhead}</strong> people ahead of you</p>
+
             </div>
           </>
         )}
