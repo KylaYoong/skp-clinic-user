@@ -62,7 +62,7 @@ const Register = () => {
       await setDoc(userRef, {
         employeeID: id,
         queueNumber,
-        status: "waiting",
+        status: "Waiting",
         timestamp: Timestamp.now(),
       });
 
