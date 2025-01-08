@@ -11,15 +11,28 @@ const Register = () => {
   const handleSubmit = async (e) => {
     e.preventDefault();
 
-    try {
-      // Verify Employee ID exists in the employees collection
-      const employeesCollection = collection(db, "employees");
-      const employeeSnapshot = await getDocs(query(employeesCollection, where("employeeID", "==", id)));
+    if (!id.match(/^\d{6}$/)) {
+      alert("Employee ID must be exactly 6 digits!");
+      return;
+    }
 
+    try {
+      // Query the employees collection
+      const employeesCollection = collection(db, "employees");
+      const employeeQuery = query(employeesCollection, where("employeeID", "==", id));
+      const employeeSnapshot = await getDocs(employeeQuery);
+
+      console.log("Employee Query Results:", employeeSnapshot.docs.map((doc) => doc.data()));
+
+      // Check if the Employee ID exists
       if (employeeSnapshot.empty) {
         alert("Invalid Employee ID! You are not a verified employee.");
         return;
       }
+
+      // Retrieve employee data (optional)
+      const employeeData = employeeSnapshot.docs[0].data();
+      console.log("Employee Data Retrieved:", employeeData);
 
       // Queue management
       const queueCollection = collection(db, "queueMeta");
@@ -29,6 +42,8 @@ const Register = () => {
 
       if (!queueSnapshot.empty) {
         const queueData = queueSnapshot.docs[0].data();
+        console.log("Queue Data Retrieved:", queueData);
+
         const today = new Date().setHours(0, 0, 0, 0);
         const lastResetDate = queueData.lastResetDate?.toDate()?.setHours(0, 0, 0, 0) || 0;
 
@@ -56,6 +71,8 @@ const Register = () => {
           lastResetDate: Timestamp.fromDate(new Date()),
         });
       }
+
+      console.log("Assigned Queue Number:", queueNumber);
 
       // Add to the queue collection
       const userRef = doc(collection(db, "queue"), id);

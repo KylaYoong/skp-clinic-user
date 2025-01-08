@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { collection, query, where, getDocs } from "firebase/firestore";
+import { collection, query, where, getDocs, onSnapshot } from "firebase/firestore";
 import { db } from "./firebase-config";
 import "./QueueStatus.css";
 
@@ -11,76 +11,66 @@ const QueueStatus = () => {
   const [date, setDate] = useState("");
   const [time, setTime] = useState("");
 
+  
   useEffect(() => {
-    const fetchQueueStatus = async () => {
-      try {
-        setLoading(true);
+    // Get the employee ID from localStorage
+    const userID = localStorage.getItem("employeeID");
+    if (!userID) {
+      alert("No employee ID found. Please register first!");
+      return;
+    }
 
-        // Get the employee ID from localStorage
-        const userID = localStorage.getItem("employeeID");
-        console.log("Fetched employeeID from localStorage:", userID);
+    // Real-time listener for user queue details
+    const queueRef = collection(db, "queue");
+    const userQuery = query(queueRef, where("employeeID", "==", userID));
 
-        if (!userID) {
-          console.error("No employee ID found in localStorage.");
-          setQueueNumber("N/A");
-          setCurrentServing("None");
-          setPeopleAhead(0);
-          setLoading(false);
-          return;
-        }
+    const unsubscribeUser = onSnapshot(userQuery, (snapshot) => {
+      if (!snapshot.empty) {
+        const userData = snapshot.docs[0].data();
+        setQueueNumber(userData.queueNumber);
 
-        // Fetch user queue details
-        const queueRef = collection(db, "queue");
-        const userQuery = query(queueRef, where("employeeID", "==", userID));
-        const userSnapshot = await getDocs(userQuery);
-
-        console.log("Queue data for employee:", userSnapshot.docs.map(doc => doc.data()));
-
-        if (!userSnapshot.empty) {
-          const userData = userSnapshot.docs[0].data();
-          setQueueNumber(userData.queueNumber);
-
-          if (userData.timestamp) {
-            const timestamp = userData.timestamp.toDate();
-            setDate(timestamp.toLocaleDateString());
-            setTime(timestamp.toLocaleTimeString([], { hour: "2-digit", minute: "2-digit" }));
-          } else {
-            setDate("No Date");
-            setTime("No Time");
-          }
-
-          // Fetch the people ahead in the queue
-          const peopleAheadQuery = query(queueRef, where("queueNumber", "<", userData.queueNumber));
-          const peopleAheadSnapshot = await getDocs(peopleAheadQuery);
-          setPeopleAhead(peopleAheadSnapshot.size);
+        if (userData.timestamp) {
+          const timestamp = userData.timestamp.toDate();
+          setDate(timestamp.toLocaleDateString());
+          setTime(timestamp.toLocaleTimeString([], { hour: "2-digit", minute: "2-digit" }));
         } else {
-          console.warn("No queue data found for employee ID:", userID);
-          setQueueNumber("N/A");
-          setPeopleAhead(0);
+          setDate("No Date");
+          setTime("No Time");
         }
-
-        // Query the queue collection for the current serving entry
-        const currentServingQuery = query(queueRef, where("status", "==", "being attended"));
-        const currentServingSnapshot = await getDocs(currentServingQuery);
-
-        if (!currentServingSnapshot.empty) {
-          const currentServingData = currentServingSnapshot.docs[0].data();
-          setCurrentServing(currentServingData.queueNumber || "None");
-        } else {
-          setCurrentServing("None");
-        }
-      } catch (error) {
-        console.error("Error fetching queue status:", error);
-        setQueueNumber("Error");
-        setCurrentServing("Error");
-        setPeopleAhead(0);
-      } finally {
-        setLoading(false);
+      } else {
+        setQueueNumber("N/A");
       }
-    };
+    });
 
-    fetchQueueStatus();
-  }, []);
+    // Real-time listener for current serving
+    const currentServingQuery = query(queueRef, where("status", "==", "being attended"));
+
+    const unsubscribeServing = onSnapshot(currentServingQuery, (snapshot) => {
+      if (!snapshot.empty) {
+        const currentServingData = snapshot.docs[0].data();
+        setCurrentServing(currentServingData.queueNumber || "No one is currently being served");
+      } else {
+        setCurrentServing("No one is currently being served");
+      }
+    });
+
+    // Real-time listener for people ahead
+    const aheadQuery = query(queueRef, where("status", "==", "waiting"));
+    const unsubscribeAhead = onSnapshot(aheadQuery, (snapshot) => {
+      const aheadCount = snapshot.docs.filter((doc) => doc.data().queueNumber < queueNumber).length;
+      setPeopleAhead(aheadCount);
+    });
+
+    setLoading(false);
+
+    // Cleanup listeners on component unmount
+    return () => {
+      unsubscribeUser();
+      unsubscribeServing();
+      unsubscribeAhead();
+    };
+  }, [queueNumber]);
+
 
   return (
     <div className="queue-status-page">
