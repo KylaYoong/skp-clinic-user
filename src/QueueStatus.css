@@ -39,17 +39,6 @@
     margin-bottom: 14px;
   }
   
-  /* Current ticket card */
-  /* Flexbox for date and time alignment */
-  .date-time {
-    display: flex;
-    justify-content: space-between;
-    margin-top: 20px;
-    font-size: 20px;
-    font-weight: bold;
-    color: #000000;
-  }
-  
   /* Flex container for ticket card */
   .ticket-details {
     display: flex;
@@ -60,9 +49,9 @@
   .current-serving-card {
     background-color: #4CAF50; /* Green background */
     color: #fff;
-    padding: 26px;
+    padding: 18px;
     border-radius: 8px;
-    font-size: 66px;
+    font-size: 70px;
     font-weight: bold;
     text-align: center;
     min-width: 300px; /* Ensure proper size for the ticket */
@@ -86,3 +75,14 @@
     margin-bottom: 10px;
   }
   
+
+    /* Current ticket card */
+  /* Flexbox for date and time alignment */
+  .date-time {
+    display: flex;
+    justify-content: space-between;
+    margin-top: 20px;
+    font-size: 20px;
+    font-weight: bold;
+    color: #000000;
+  }
