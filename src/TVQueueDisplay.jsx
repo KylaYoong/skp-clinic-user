@@ -12,11 +12,43 @@ const TVQueueDisplay = () => {
   // Announce the queue number
   const announceQueueNumber = (queueNumber) => {
     if ("speechSynthesis" in window) {
-      const utterance = new SpeechSynthesisUtterance(`Now serving ${queueNumber}`);
-      utterance.lang = "en-US";
-      window.speechSynthesis.speak(utterance);
+      // Format the queue number as "zero zero seven"
+      const formattedQueueNumber = queueNumber
+        .toString()
+        .split("")
+        .map((digit) => {
+          if (digit === "0") return "zero";
+          return digit;
+        })
+        .join(" ");
+  
+      // Play "ding dong" sound
+      const audio = new Audio('/sounds/minimalist-ding-dong.wav');
+    //   const audio = new Audio('/sounds/ding-dong.wav');
+      audio.play();
+  
+      // Wait for the sound to finish before speaking
+      audio.onended = () => {
+        // English announcement
+        // const englishUtterance = new SpeechSynthesisUtterance(`Now serving ${formattedQueueNumber}`);
+        const englishUtterance = new SpeechSynthesisUtterance(`${formattedQueueNumber}`);
+        englishUtterance.lang = "en-US";
+        englishUtterance.rate = 0.1; // Slower pace
+  
+        // Malay announcement
+        // const malayUtterance = new SpeechSynthesisUtterance(`Sekarang nombor ${queueNumber}`);
+        const malayUtterance = new SpeechSynthesisUtterance(`${queueNumber}`);
+        malayUtterance.lang = "ms-MY";
+        malayUtterance.rate = 0.1; // Slower pace
+  
+        // Queue announcements
+        window.speechSynthesis.speak(englishUtterance);
+        window.speechSynthesis.speak(malayUtterance);
+      };
     }
   };
+  
+  
 
   // Update current time every second
   useEffect(() => {
