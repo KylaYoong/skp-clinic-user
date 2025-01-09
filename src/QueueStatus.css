@@ -49,12 +49,12 @@
   .current-serving-card {
     background-color: #4CAF50; /* Green background */
     color: #fff;
-    padding: 18px;
+    padding: 16px;
     border-radius: 8px;
-    font-size: 70px;
+    font-size: 74px;
     font-weight: bold;
     text-align: center;
-    min-width: 300px; /* Ensure proper size for the ticket */
+    min-width: 280px; /* Ensure proper size for the ticket */
   }
   
   
