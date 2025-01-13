@@ -76,8 +76,8 @@
   }
   
 
-    /* Current ticket card */
   /* Flexbox for date and time alignment */
+  /* Current ticket card */
   .date-time {
     display: flex;
     justify-content: space-between;

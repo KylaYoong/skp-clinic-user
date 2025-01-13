@@ -13,12 +13,14 @@ const QueueStatus = () => {
   const [userQueueNumber, setUserQueueNumber] = useState(null); // State for user's queue number
 
   useEffect(() => {
+    // Get the employee ID from localStorage
     const userID = localStorage.getItem("employeeID");
     if (!userID) {
       alert("No employee ID found. Please register first!");
       return;
     }
 
+    // Real-time listener for user queue details
     const queueRef = collection(db, "queue");
     const userQuery = query(queueRef, where("employeeID", "==", userID));
 
@@ -172,8 +174,8 @@ const QueueStatus = () => {
         <br />
         <p>Stay safe, stay healthy</p>
         <div className="date-time">
-          <span className="date">{date}</span>
-          <span className="time">{time}</span>
+        <span className="date" style={{ fontSize: "20px" }}>{date}</span>
+        <span className="time" style={{ fontSize: "20px" }}>{time}</span>
         </div>
       </div>
     </div>
