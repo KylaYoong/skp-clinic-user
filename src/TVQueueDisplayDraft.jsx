@@ -48,6 +48,7 @@ const TVQueueDisplay = () => {
     }
   };
   
+  
 
   // Update current time every second
   useEffect(() => {
@@ -71,69 +72,59 @@ const TVQueueDisplay = () => {
     return () => clearInterval(timer);
   }, []);
 
-
   // Fetch real-time queue data
   useEffect(() => {
     const queueRef = collection(db, "queue");
     const q = query(queueRef, orderBy("timestamp", "asc"));
 
     const unsubscribe = onSnapshot(q, (snapshot) => {
-        const today = new Date();
-        const todayStart = new Date(today.setHours(0, 0, 0, 0)); // Start of today
-        const todayEnd = new Date(today.setHours(23, 59, 59, 999)); // End of today
+      const patients = snapshot.docs.map((doc) => ({
+        id: doc.id,
+        ...doc.data(),
+      }));
 
-        const patients = snapshot.docs
-            .map((doc) => ({
-                id: doc.id,
-                ...doc.data(),
-            }))
-            .filter((patient) => {
-                const patientTimestamp = patient.timestamp?.toDate();
-                return patientTimestamp >= todayStart && patientTimestamp <= todayEnd;
-            });
+      // First, find the currently serving patient
+      const servingPatient = patients.find(
+        (patient) => patient.status === "In Consultation"
+      );
 
-        // First, find the currently serving patient
-        const servingPatient = patients.find(
-            (patient) => patient.status === "In Consultation"
-        );
+      // Get all completed patients first
+      const completedPatientsList = patients.filter(
+        (patient) => patient.status === "Completed"
+      );
 
-        // Get all completed patients
-        const completedPatientsList = patients.filter(
-            (patient) => patient.status === "Completed"
-        );
+      // Get queue numbers of completed and serving patients to exclude from waiting list
+      const excludeQueueNumbers = new Set([
+        ...completedPatientsList.map(p => p.queueNumber),
+        servingPatient?.queueNumber
+      ].filter(Boolean));
 
-        // Get queue numbers of completed and serving patients to exclude from waiting list
-        const excludeQueueNumbers = new Set([
-            ...completedPatientsList.map((p) => p.queueNumber),
-            servingPatient?.queueNumber,
-        ].filter(Boolean));
+      // Filter waiting patients (exclude completed and serving patients)
+      const waitingPatients = patients.filter(
+        (patient) =>
+          patient.status === "Waiting" &&
+          !excludeQueueNumbers.has(patient.queueNumber)
+      );
 
-        // Filter waiting patients (exclude completed and serving patients)
-        const waitingPatients = patients.filter(
-            (patient) =>
-                patient.status === "Waiting" &&
-                !excludeQueueNumbers.has(patient.queueNumber)
-        );
+      // Sort completed patients by timestamp (newest first)
+      completedPatientsList.sort((a, b) => b.timestamp.toMillis() - a.timestamp.toMillis());
 
-        // Sort completed patients by timestamp (newest first)
-        completedPatientsList.sort((a, b) => b.timestamp.toMillis() - a.timestamp.toMillis());
+      // Announce if there's a new serving patient
+      if (servingPatient && servingPatient.queueNumber !== currentServing?.queueNumber) {
+        console.log(`Announcing queue number ${servingPatient.queueNumber}`);
+        announceQueueNumber(servingPatient.queueNumber);
+      }
 
-        // Announce if there's a new serving patient
-        if (servingPatient && servingPatient.queueNumber !== currentServing?.queueNumber) {
-            console.log(`Announcing queue number ${servingPatient.queueNumber}`);
-            announceQueueNumber(servingPatient.queueNumber);
-        }
-
-        // Update state
-        setCurrentServing(servingPatient || null);
-        setUpcomingPatients(waitingPatients);
-        setCompletedPatients(completedPatientsList);
+      // Update state
+      setCurrentServing(servingPatient || null);
+      setUpcomingPatients(waitingPatients);
+      setCompletedPatients(completedPatientsList);
     });
 
+
+    
     return () => unsubscribe();
-}, [currentServing]);
-
-
+  }, [currentServing]);
 
   return (
     <div className="tv-display">
