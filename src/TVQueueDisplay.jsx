@@ -3,6 +3,7 @@ import { collection, query, orderBy, onSnapshot } from "firebase/firestore";
 import { db } from "./firebase-config";
 import "./TVQueueDisplay.css";
 
+
 const TVQueueDisplay = () => {
   const [currentServing, setCurrentServing] = useState(null);
   const [upcomingPatients, setUpcomingPatients] = useState([]);
