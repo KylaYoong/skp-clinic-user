@@ -38,6 +38,13 @@
     color: #333;
     margin-bottom: 14px;
   }
+
+  .queue-status-container h2 {
+    font-size: 18px;
+    color: #666; /* Softer color for Malay text */
+    margin-bottom: 16px;
+  }
+  
   
   /* Flex container for ticket card */
   .ticket-details {
@@ -62,7 +69,6 @@
   .queue-status-container p {
     font-size: 16px;
     color: #666;
-    /* margin-top: 10px; */
   }
   
   .current-serving {

@@ -156,6 +156,7 @@ const QueueStatus = () => {
     <div className="queue-status-page">
       <div className="queue-status-container">
         <h1>Your Ticket Number is</h1>
+        <h2>Nombor Tiket Anda ialah</h2>
         {loading ? (
           <p>Loading your ticket...</p>
         ) : (
@@ -165,6 +166,9 @@ const QueueStatus = () => {
             </div>
             <div className="current-serving">
               <p>Current Serving: <strong>{currentServing}</strong></p>
+              {/* <p>
+              Sedang Dilayani: <strong>{currentServing}</strong>
+              </p> */}
               <p>There are <strong>{peopleAhead}</strong> people ahead of you</p>
             </div>
           </>
