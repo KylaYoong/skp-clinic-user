@@ -12,6 +12,14 @@ const QueueStatus = () => {
   const [time, setTime] = useState("");
   const [userQueueNumber, setUserQueueNumber] = useState(null); // State for user's queue number
 
+
+  useEffect(() => {
+    alert(
+        "Please screenshot this ticket. \nSila tangkap layar tiket ini. \nकृपया यस टिकटको स्क्रिनसट लिनुहोस्। \nကျေးဇူးပြုပြီး ဒီလက်မှတ်ကို စခရင်ရှော့လုပြပါ"
+    );
+  }, []); // This ensures it runs only once on component mount
+
+
   useEffect(() => {
     // Get the employee ID from localStorage
     const userID = localStorage.getItem("employeeID");

@@ -38,7 +38,7 @@ const Register = () => {
 
       // Check if the Employee ID exists
       if (employeeSnapshot.empty) {
-        alert("Invalid Employee ID! You are not a verified employee.");
+        alert("Please register, you are not in the system. \nSila daftar, anda tidak berada dalam sistem. \nकृपया दर्ता गर्नुहोस्, तपाईं प्रणालीमा हुनुहुन्न। \nကျေးဇူးပြု၍ မှတ်ပုံတင်ပါ၊ သင်စနစ်တွင်မရှိပါ။");
         return;
       }
 
