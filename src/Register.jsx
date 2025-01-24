@@ -4,12 +4,24 @@ import { collection, doc, setDoc, Timestamp, query, getDocs, where } from "fireb
 import { useNavigate } from "react-router-dom";
 import "./Register.css";
 
+
 const Register = () => {
   const [id, setId] = useState(""); // Employee ID
   const navigate = useNavigate();
 
   const handleSubmit = async (e) => {
     e.preventDefault();
+
+    // Get the current time
+    const currentTime = new Date();
+    const startTime = new Date(currentTime.setHours(8, 0, 0)); // 8:00 AM
+    const endTime = new Date(currentTime.setHours(12, 0, 0)); // 12:00 PM
+
+    // Check if current time is within allowed range
+    if (currentTime < startTime || currentTime > endTime) {
+      alert("Registration is available only from 8:00 AM to 12:00 PM.");
+      return;
+    }
 
     if (!id.match(/^\d{6}$/)) {
       alert("Employee ID must be exactly 6 digits!");

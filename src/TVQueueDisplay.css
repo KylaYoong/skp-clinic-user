@@ -44,8 +44,10 @@
 
 .now-serving-horizontal {
     flex: 1;
-    border: 3px solid #f44336;
-    background-color: #ffebee;
+    /* border: 3px solid #f44336; */
+    border: 3px solid #ff9901;
+    /* background-color: #ffebee; */
+    background-color: #feebe1;
     border-radius: 10px;
     padding: 10px;
     margin: 0 20px;
@@ -53,8 +55,9 @@
 }
 
 .now-serving-horizontal .queue-number {
-    font-size: 120px;
-    color: #d32f2f;
+    font-size: 140px;
+    /* color: #d32f2f; */
+    color: #ff9900;
     font-weight: bold;
 }
 
@@ -77,11 +80,12 @@
 }
 
 .waiting-left-side {
-    border: 3px solid #4caf50;
+    border: 3px solid #f44336;
 }
 
 .completed-right-side {
-    border: 3px solid #ff9800;
+    /* border: 3px solid #ff9800; */
+    border: 3px solid #4caf50;
     overflow-y: auto; /* Enable vertical scrolling */
     max-height: calc(100vh - 350px); /* Adjust height based on your layout */
 }
@@ -97,11 +101,12 @@
 }
 
 .waiting-left-side .queue-item {
-    background-color: #c8e6c9;
+    background-color: #f9cad1;
 }
 
 .completed-right-side .completed-item {
-    background-color: #ffe0b2;
+    /* background-color: #ffe0b2; */
+    background-color: #c8e6c9;
 }
 
 /* Last item in both sections should not have bottom margin */
