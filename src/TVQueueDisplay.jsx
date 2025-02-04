@@ -136,7 +136,6 @@ const TVQueueDisplay = () => {
 
 
 
-
   return (
     <div className="tv-display">
       <div className="header">

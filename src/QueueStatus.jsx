@@ -14,13 +14,6 @@ const QueueStatus = () => {
 
 
   useEffect(() => {
-    alert(
-        "Please screenshot this ticket. \nSila tangkap layar tiket ini. \nकृपया यस टिकटको स्क्रिनसट लिनुहोस्। \nကျေးဇူးပြုပြီး ဒီလက်မှတ်ကို စခရင်ရှော့လုပြပါ"
-    );
-  }, []); // This ensures it runs only once on component mount
-
-
-  useEffect(() => {
     // Get the employee ID from localStorage
     const userID = localStorage.getItem("employeeID");
     if (!userID) {
@@ -158,6 +151,20 @@ const QueueStatus = () => {
       setPeopleAhead(0);
     }
   }, [userQueueNumber]);
+
+
+  useEffect(() => {
+    if (!loading && queueNumber !== "N/A") {
+      const alertTimeout = setTimeout(() => {
+        alert(
+          "Please screenshot this ticket. \nSila tangkap layar tiket ini. \nकृपया यस टिकटको स्क्रिनसट लिनुहोस्। \nကျေးဇူးပြုပြီး ဒီလက်မှတ်ကို စခရင်ရှော့လုပြပါ"
+        );
+      }, 1000); // Delay of 2 seconds (2000ms)
+
+      return () => clearTimeout(alertTimeout); // Cleanup timeout if component unmounts
+    }
+  }, [loading, queueNumber]);
+
   
 
   return (
