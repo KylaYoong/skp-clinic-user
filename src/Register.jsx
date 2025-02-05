@@ -5,13 +5,13 @@ import { useNavigate } from "react-router-dom";
 import "./Register.css";
 
 const Register = () => {
-  const [id, setId] = useState(""); // Employee ID
-  const navigate = useNavigate();
+  const [id, setId] = useState(""); // State variable to store employee ID
+  const navigate = useNavigate(); // Hook to enable navigation within the app
 
-
+  // Function to check if an employee has already registered today
   const checkDuplicateRegistration = async (employeeID) => {
     try {
-      const queueCollection = collection(db, "queue");
+      const queueCollection = collection(db, "queue");  // Reference to the "queue" collection in Firestore
   
       // Get today's date at 00:00:00 (midnight)
       const todayStart = new Date();
@@ -27,7 +27,7 @@ const Register = () => {
         where("timestamp", ">=", todayTimestamp) // Only today's registrations
       );
   
-      const queueSnapshot = await getDocs(queueQuery);
+      const queueSnapshot = await getDocs(queueQuery);  // Execute query
   
       // If snapshot is not empty, user has already registered today
       return !queueSnapshot.empty;
@@ -37,7 +37,7 @@ const Register = () => {
     }
   };
 
-  
+  // Function to handle form submission
   const handleSubmit = async (e) => {
     e.preventDefault();
 
@@ -49,7 +49,7 @@ const Register = () => {
     startTime.setHours(8, 0, 0, 0); // 8:00 AM
 
     const endTime = new Date();
-    endTime.setHours(18, 0, 0, 0); // 12:00 PM
+    endTime.setHours(12, 0, 0, 0); // 12:00 PM
 
 
     // Check if current time is within allowed range
@@ -68,14 +68,6 @@ const Register = () => {
 
     if (hasRegistered) {
       alert("You have already registered today!");
-      return;
-    }
-
-    // Proceed with registration if not a duplicate
-    console.log("Proceeding with registration...");
-
-    if (!id.match(/^\d{6}$/)) {
-      alert("Employee ID must be exactly 6 digits!");
       return;
     }
 
@@ -180,6 +172,8 @@ const Register = () => {
       alert("Error: Unable to register. Please try again.");
     }
   };
+
+  
 
   return (
     <div className="register-page">

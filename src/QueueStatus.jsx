@@ -12,7 +12,6 @@ const QueueStatus = () => {
   const [time, setTime] = useState("");
   const [userQueueNumber, setUserQueueNumber] = useState(null); // State for user's queue number
 
-
   useEffect(() => {
     // Get the employee ID from localStorage
     const userID = localStorage.getItem("employeeID");
@@ -159,7 +158,7 @@ const QueueStatus = () => {
         alert(
           "Please screenshot this ticket. \nSila tangkap layar tiket ini. \nकृपया यस टिकटको स्क्रिनसट लिनुहोस्। \nကျေးဇူးပြုပြီး ဒီလက်မှတ်ကို စခရင်ရှော့လုပြပါ"
         );
-      }, 1000); // Delay of 2 seconds (2000ms)
+      }, 1000); // Delay of 1 second (1000ms)
 
       return () => clearTimeout(alertTimeout); // Cleanup timeout if component unmounts
     }

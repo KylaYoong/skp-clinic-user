@@ -34,13 +34,13 @@ const TVQueueDisplay = () => {
         // const englishUtterance = new SpeechSynthesisUtterance(`Now serving ${formattedQueueNumber}`);
         const englishUtterance = new SpeechSynthesisUtterance(`${formattedQueueNumber}`);
         englishUtterance.lang = "en-US";
-        englishUtterance.rate = 0.1; // Slower pace
+        englishUtterance.rate = 0.3; // Slower pace
   
         // Malay announcement
         // const malayUtterance = new SpeechSynthesisUtterance(`Sekarang nombor ${queueNumber}`);
         const malayUtterance = new SpeechSynthesisUtterance(`${queueNumber}`);
         malayUtterance.lang = "ms-MY";
-        malayUtterance.rate = 0.1; // Slower pace
+        malayUtterance.rate = 0.3; // Slower pace
   
         // Queue announcements
         window.speechSynthesis.speak(englishUtterance);
@@ -49,7 +49,6 @@ const TVQueueDisplay = () => {
     }
   };
   
-
   // Update current time every second
   useEffect(() => {
     const timer = setInterval(() => {
