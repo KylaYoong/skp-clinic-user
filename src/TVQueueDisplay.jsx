@@ -3,7 +3,7 @@ import { collection, query, orderBy, onSnapshot } from "firebase/firestore";
 import { db } from "./firebase-config";
 import "./TVQueueDisplay.css";
 
-
+// displayed at kiosk
 const TVQueueDisplay = () => {
   const [currentServing, setCurrentServing] = useState(null);
   const [upcomingPatients, setUpcomingPatients] = useState([]);
@@ -13,7 +13,7 @@ const TVQueueDisplay = () => {
   // Announce the queue number
   const announceQueueNumber = (queueNumber) => {
     if ("speechSynthesis" in window) {
-      // Format the queue number as "zero zero seven"
+      // Format the queue number as "zero zero one"
       const formattedQueueNumber = queueNumber
         .toString()
         .split("")
