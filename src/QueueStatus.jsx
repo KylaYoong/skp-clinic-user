@@ -192,6 +192,12 @@ const QueueStatus = () => {
         <p>Thank you for visiting our clinic</p>
         <br />
         <p>Stay safe, stay healthy</p>
+        <br />
+        <p>*Do not close this page.</p> 
+        <p>*Jangan tutup halaman ini.</p>
+        <p>*कृपया यो पृष्ठ बन्द नगर्नुहोस्।</p>
+        <p>*ကျေးဇူးပြု၍ ဒီစာမျက်နှာကို ပိတ်မနှင်းပါနဲ့။</p>
+      
         <div className="date-time">
         <span className="date" style={{ fontSize: "20px" }}>{date}</span>
         <span className="time" style={{ fontSize: "20px" }}>{time}</span>

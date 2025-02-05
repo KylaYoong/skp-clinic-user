@@ -49,7 +49,7 @@ const Register = () => {
     startTime.setHours(8, 0, 0, 0); // 8:00 AM
 
     const endTime = new Date();
-    endTime.setHours(12, 0, 0, 0); // 12:00 PM
+    endTime.setHours(16, 0, 0, 0); // 12:00 PM
 
 
     // Check if current time is within allowed range
