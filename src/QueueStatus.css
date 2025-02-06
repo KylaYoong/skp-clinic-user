@@ -84,7 +84,7 @@
 
   /* Flexbox for date and time alignment */
   /* Current ticket card */
-  .date-time {
+  .queue-date-time {
     display: flex;
     justify-content: space-between;
     margin-top: 20px;

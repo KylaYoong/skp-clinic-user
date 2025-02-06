@@ -197,7 +197,7 @@ const QueueStatus = () => {
         <p>*कृपया यो पृष्ठ बन्द नगर्नुहोस्।</p>
         <p>*ကျေးဇူးပြု၍ ဒီစာမျက်နှာကို ပိတ်မနှင်းပါနဲ့။</p>
       
-        <div className="date-time">
+        <div className="queue-date-time">
         <span className="date" style={{ fontSize: "20px" }}>{date}</span>
         <span className="time" style={{ fontSize: "20px" }}>{time}</span>
         </div>
