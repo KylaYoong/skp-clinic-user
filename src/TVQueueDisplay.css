@@ -25,7 +25,7 @@
 
 .date,
 .time {
-    font-size: 56px;
+    font-size: 60px;
     white-space: nowrap;
     color: white
 }
@@ -48,9 +48,9 @@
 .now-serving-horizontal {
     flex: 1;
     /* border: 3px solid #f44336; */
-    border: 3px solid #ff9901;
+    /* border: 3px solid #ff9901; */
     /* background-color: #ffebee; */
-    background-color: #ffffff;
+    /* background-color: #ffffff; */
     border-radius: 10px;
     padding: 10px;
     margin: 0 20px;
@@ -58,9 +58,10 @@
 }
 
 .now-serving-horizontal .queue-number {
-    font-size: 140px;
+    font-size: 280px;
     /* color: #d32f2f; */
-    color: #ff9900;
+    /* color: #ff9900; */
+    color: hsl(56, 100%, 87%);
     font-weight: bold;
 }
 
@@ -118,8 +119,19 @@
     margin-bottom: 0;
 }
 
+/* Now Serving (Sekarang Memanggil) */
+.now-serving-horizontal h2 {
+    margin: 0;
+    font-size: 50px;
+    padding: 10px 0;
+    font-weight: bold;
+    /* color: #4caf50 */
+    color: #fff786
+}
+
+
 /* Align All Section Headers */
-.now-serving-horizontal h2,
+/* Waiting (Menunggu) & Completed (Selesai) */
 .waiting-left-side h2,
 .completed-right-side h2 {
     margin: 0;
