@@ -156,7 +156,7 @@ const TVQueueDisplay = () => {
         <div className="waiting-completed">
           <div className="waiting-left-side">
             <div className="waiting-section">
-              <h2>Waiting (Menunggu)</h2>
+              <h2>Menunggu</h2>
               {upcomingPatients.length > 0 ? (
                 upcomingPatients.map((patient) => (
                   <div key={patient.id} className="queue-item">
@@ -171,7 +171,7 @@ const TVQueueDisplay = () => {
 
           <div className="completed-right-side">
             <div className="completed-section">
-                <h2>Completed (Selesai)</h2>
+                <h2>Selesai</h2>
                 {completedPatients.length > 0 ? (
                 completedPatients.map((patient) => (
                     <div key={patient.id} className="completed-item">
