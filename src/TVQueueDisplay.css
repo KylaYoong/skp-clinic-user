@@ -35,7 +35,7 @@
     flex-direction: column;
     justify-content: flex-start;
     flex-grow: 1;
-    padding: 20px;
+    padding: 10px; /* inititally 20px */
 }
 
 .horizontal-section {
@@ -58,7 +58,8 @@
 }
 
 .now-serving-horizontal .queue-number {
-    font-size: 400px;
+    margin-top: 0;
+    font-size: 500px;
     /* color: #d32f2f; */
     /* color: #ff9900; */
     color: hsl(56, 100%, 87%);
