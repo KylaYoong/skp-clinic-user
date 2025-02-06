@@ -84,11 +84,12 @@
 
   /* Flexbox for date and time alignment */
   /* Current ticket card */
-  .queue-date-time {
+  .queue-status-page .date-time .queue-date,
+  .queue-status-page .date-time .queue-time {
     display: flex;
     justify-content: space-between;
     margin-top: 20px;
     font-size: 20px;
     font-weight: bold;
-    color: #000000;
+    color: #000000 !important; /* Force the color to black */
   }
