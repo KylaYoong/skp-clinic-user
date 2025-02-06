@@ -34,13 +34,13 @@ const TVQueueDisplay = () => {
         // const englishUtterance = new SpeechSynthesisUtterance(`Now serving ${formattedQueueNumber}`);
         const englishUtterance = new SpeechSynthesisUtterance(`${formattedQueueNumber}`);
         englishUtterance.lang = "en-US";
-        englishUtterance.rate = 0.3; // Slower pace
+        englishUtterance.rate = 0.6; // Lower values make the speech slower
   
         // Malay announcement
         // const malayUtterance = new SpeechSynthesisUtterance(`Sekarang nombor ${queueNumber}`);
         const malayUtterance = new SpeechSynthesisUtterance(`${queueNumber}`);
         malayUtterance.lang = "ms-MY";
-        malayUtterance.rate = 0.3; // Slower pace
+        malayUtterance.rate = 0.6; 
   
         // Queue announcements
         window.speechSynthesis.speak(englishUtterance);
@@ -139,6 +139,10 @@ const TVQueueDisplay = () => {
     <div className="tv-display">
       <div  className="header">
         {/* <img src="/images/SKP-logo.jpg" alt="SKP Logo" className="logo" /> */}
+        {/* <div>
+        <h1>Queue Dashboard</h1>
+        </div> */}
+        
         <div className="date">{currentTime.split(" ")[0]}</div>
         <div className="time">{currentTime.split(" ").slice(1).join(" ")}</div>
       </div>
