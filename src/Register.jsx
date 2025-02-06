@@ -127,7 +127,7 @@ const Register = () => {
 
         if (today !== lastResetDate) {
           // Reset queue number for a new day
-          queueNumber = "001";
+          queueNumber = "01";
           await setDoc(queueSnapshotMeta.docs[0].ref, {
             queueNumber,
             lastResetDate: Timestamp.fromDate(new Date()),
@@ -135,7 +135,7 @@ const Register = () => {
         } else {
           // Increment queue number for the current day
           const lastQueueNumber = parseInt(queueData.queueNumber, 10) || 0;
-          queueNumber = String(lastQueueNumber + 1).padStart(3, "0");
+          queueNumber = String(lastQueueNumber + 1).padStart(2, "0");
           await setDoc(queueSnapshotMeta.docs[0].ref, {
             ...queueData,
             queueNumber,
@@ -143,7 +143,7 @@ const Register = () => {
         }
       } else {
         // Initialize queue number if none exists
-        queueNumber = "001";
+        queueNumber = "01";
         await setDoc(doc(queueMetaCollection, "queueMeta"), {
           queueNumber,
           lastResetDate: Timestamp.fromDate(new Date()),
