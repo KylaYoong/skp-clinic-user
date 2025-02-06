@@ -25,7 +25,7 @@
 
 .date,
 .time {
-    font-size: 60px;
+    font-size: 70px;
     white-space: nowrap;
     color: white
 }
@@ -58,7 +58,7 @@
 }
 
 .now-serving-horizontal .queue-number {
-    font-size: 500px;
+    font-size: 400px;
     /* color: #d32f2f; */
     /* color: #ff9900; */
     color: hsl(56, 100%, 87%);
@@ -122,7 +122,7 @@
 /* Now Serving (Sekarang Memanggil) */
 .now-serving-horizontal h2 {
     margin: 0;
-    font-size: 50px;
+    font-size: 56px;
     padding: 10px 0;
     font-weight: bold;
     /* color: #4caf50 */
