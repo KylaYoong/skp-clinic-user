@@ -92,7 +92,7 @@
     padding: 20px;
     border-radius: 10px;
     background-color: #ffffff;
-    min-height: 600px; /* Ensure consistent height */
+    min-height: 400px; /* Ensure consistent height */
 }
 
 .waiting-left-side {
