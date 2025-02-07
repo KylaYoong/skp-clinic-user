@@ -81,15 +81,18 @@
     margin-bottom: 10px;
   }
   
-
-  /* Flexbox for date and time alignment */
-  /* Current ticket card */
-  .queue-status-page .date-time .queue-date,
-  .queue-status-page .date-time .queue-time {
-    display: flex;
-    justify-content: space-between;
-    margin-top: 20px;
-    font-size: 20px;
-    font-weight: bold;
-    color: #000000 !important; /* Force the color to black */
+  
+  .queue-date-time {
+    display: flex; /* Makes the container a flexbox */
+    justify-content: space-between; /* Adds space between the two elements */
+    align-items: center; /* Ensures they are vertically aligned */
+    margin-top: 20px; /* Adds spacing above */
   }
+  
+  .queue-date,
+  .queue-time {
+    font-size: 20px; /* Ensures consistent font size */
+    font-weight: bold;
+    color: #000000;
+  }
+  

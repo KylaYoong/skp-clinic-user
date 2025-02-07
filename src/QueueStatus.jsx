@@ -197,11 +197,11 @@ const QueueStatus = () => {
         <p>*कृपया यो पृष्ठ बन्द नगर्नुहोस्।</p>
         <p>*ကျေးဇူးပြု၍ ဒီစာမျက်နှာကို ပိတ်မနှင်းပါနဲ့။</p>
       
-        <div className="date-time">
-        <span className="queue-date" style={{ fontSize: "20px" }}>{date}</span>
-        <span className="queue-time" style={{ fontSize: "20px" }}>{time}</span>
+        <div className="queue-date-time">
+          <span className="queue-date">{date}</span>
+          <span className="queue-time">{time}</span>
         </div>
-      </div>
+      </div>  { /* End of queue-status-container */ }
     </div>
   );
 };
