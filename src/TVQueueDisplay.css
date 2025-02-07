@@ -16,12 +16,14 @@
     justify-content: center;
     align-items: center;
     padding: 10px;
-    background-color: #ffffff;
+    background-color: #000000;
+    /* background-color: #858585; */
+    height: 120px;
+    color: #ffffff;
+    font-size: 40px;
+    margin-top: 40px;
 }
 
-.logo-header img {
-    height: 200px;
-}
 
 /* Date and Time Header */
 .date-time-header {
@@ -141,17 +143,6 @@
     color: #ede570
 }
 
-/* Nombor Giliran Sekarang */
-.now-serving-horizontal h3 {
-    margin: 0;
-    font-size: 50px;
-    padding: 10px 0;
-    font-weight: bold;
-    /* color: #4caf50 */
-    color: #938e8e
-}
-
-
 /* Align Section Headers */
 /* Waiting (Menunggu) & Completed (Selesai) */
 .waiting-left-side h2,
@@ -161,13 +152,3 @@
     padding: 10px 0;
     font-weight: bold;
 }
-
-.waiting-left-side h3,
-.completed-right-side h3 {
-    margin: 0;
-    font-size: 30px;
-    padding: 10px 0;
-    font-weight: bold;
-    color: #696969
-}
-
