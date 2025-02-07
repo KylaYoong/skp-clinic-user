@@ -85,12 +85,12 @@
 }
 
 .waiting-left-side {
-    border: 3px solid #f44336;
+    border: 5px solid #f44336;
 }
 
 .completed-right-side {
     /* border: 3px solid #ff9800; */
-    border: 3px solid #4caf50;
+    border: 5px solid #4caf50;
     overflow-y: auto; /* Enable vertical scrolling */
     max-height: calc(100vh - 350px); /* Adjust height based on your layout */
 }
@@ -120,10 +120,20 @@
     margin-bottom: 0;
 }
 
-/* Now Serving (Sekarang Memanggil) */
+/* Current Queue Number */
 .now-serving-horizontal h2 {
     margin: 0;
     font-size: 60px;
+    padding: 10px 0;
+    font-weight: bold;
+    /* color: #4caf50 */
+    color: #ede570
+}
+
+/* Nombor Giliran Sekarang */
+.now-serving-horizontal h3 {
+    margin: 0;
+    font-size: 50px;
     padding: 10px 0;
     font-weight: bold;
     /* color: #4caf50 */

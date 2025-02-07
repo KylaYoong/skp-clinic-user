@@ -135,7 +135,8 @@ const TVQueueDisplay = () => {
       <div className="main-container">
         <div className="horizontal-section">
           <div className="now-serving-horizontal">
-            <h2>Nombor Giliran Sekarang</h2>
+            <h2>Current Queue Number</h2>
+            <h3>Nombor Giliran Sekarang</h3>=
             <div className="queue-number">
               {currentServing ? currentServing.queueNumber : "None"}
             </div>
@@ -144,33 +145,29 @@ const TVQueueDisplay = () => {
 
         <div className="waiting-completed">
           <div className="waiting-left-side">
-            <div className="waiting-section">
-              <h2>Menunggu</h2>
-              {upcomingPatients.length > 0 ? (
-                upcomingPatients.map((patient) => (
-                  <div key={patient.id} className="queue-item">
-                    {patient.queueNumber}
-                  </div>
-                ))
-              ) : (
-                <p>No waiting patients</p>
-              )}
-            </div>
+          <div className="waiting-section">
+            <h2>Menunggu</h2>
+            {Array.isArray(upcomingPatients) && upcomingPatients.length > 0 &&
+              upcomingPatients.map((patient) => (
+                <div key={patient.id} className="queue-item">
+                  {patient.queueNumber}
+                </div>
+              ))
+            }
+          </div>
           </div>
 
           <div className="completed-right-side">
-            <div className="completed-section">
-              <h2>Selesai</h2>
-              {completedPatients.length > 0 ? (
-                completedPatients.map((patient) => (
-                  <div key={patient.id} className="completed-item">
-                    {patient.queueNumber}
-                  </div>
-                ))
-              ) : (
-                <p>No completed patients</p>
-              )}
-            </div>
+          <div className="completed-section">
+            <h2>Selesai</h2>
+            {Array.isArray(completedPatients) && completedPatients.length > 0 &&
+              completedPatients.map((patient) => (
+                <div key={patient.id} className="completed-item">
+                  {patient.queueNumber}
+                </div>
+              ))
+            }
+          </div>
           </div>
         </div>
       </div>
