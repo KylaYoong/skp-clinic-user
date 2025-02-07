@@ -10,41 +10,34 @@
 }
 
 
-/* Logo Header */
-.logo-header {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    padding: 10px;
-    background-color: #ffffff;
-}
-
-.logo-header img {
-    height: 200px;
-}
-
-/* Date and Time Header */
-.date-time-header {
-    margin-top: 20px;
-    font-size: 70px;
-    color: white;
-    /* white-space: nowrap; */
+/* Header Improvements */
+.header {
     font-weight: bold;
+    
+    color: black;
     display: flex;
     justify-content: space-between;
-    height: 100px;
+    align-items: center;
+    height: 120px;
     padding: 0 30px;
     border-bottom: 1px solid #ccc;
+    margin-top: 30px;
 }
 
 
-/* Main Content */
+.date,
+.time {
+    font-size: 70px;
+    white-space: nowrap;
+    color: white
+}
+
 .main-container {
     display: flex;
     flex-direction: column;
-    align-items: center;
+    justify-content: flex-start;
     flex-grow: 1;
-    padding: 20px;
+    padding: 10px; /* inititally 20px */
 }
 
 .horizontal-section {
@@ -78,11 +71,10 @@
 .waiting-completed {
     display: flex;
     justify-content: space-between;
-    align-items: flex-start;
     gap: 20px;
-    margin-top: 20px;
-    width: 100%;
-    padding: 0 25px;
+    margin-top: 10px;
+    margin-left: 20px; /* Matches the left margin of the "Now Serving" section */
+    margin-right: 20px; /* Matches the right margin of the "Now Serving" section */
 }
 
 .waiting-left-side,
@@ -92,7 +84,6 @@
     padding: 20px;
     border-radius: 10px;
     background-color: #ffffff;
-    min-height: 600px; /* Ensure consistent height */
 }
 
 .waiting-left-side {

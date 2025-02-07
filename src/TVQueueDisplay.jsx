@@ -127,12 +127,18 @@ const TVQueueDisplay = () => {
 
   return (
     <div className="tv-display">
-      <div className="header">
-      <img src="/images/SKPBM-LOGO.PNG" alt="SKP BM Logo" />
+      {/* Logo Header */}
+      <div className="logo-header">
+        <img src="/images/SKPBM-LOGO.PNG" alt="SKP BM Logo" />
+      </div>
+
+      {/* Date and Time Header */}
+      <div className="date-time-header">
         <div className="date">{currentTime.split(" ")[0]}</div>
         <div className="time">{currentTime.split(" ").slice(1).join(" ")}</div>
       </div>
 
+      {/* Main Content Section */}
       <div className="main-container">
         <div className="horizontal-section">
           <div className="now-serving-horizontal">
