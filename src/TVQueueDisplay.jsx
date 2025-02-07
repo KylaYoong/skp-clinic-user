@@ -135,7 +135,7 @@ const TVQueueDisplay = () => {
       <div className="main-container">
         <div className="horizontal-section">
           <div className="now-serving-horizontal">
-            <h2>Sekarang Memanggil</h2>
+            <h2>Nombor Giliran Sekarang</h2>
             <div className="queue-number">
               {currentServing ? currentServing.queueNumber : "None"}
             </div>
