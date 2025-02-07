@@ -128,6 +128,7 @@ const TVQueueDisplay = () => {
   return (
     <div className="tv-display">
       <div className="header">
+      <img src="/images/SKPBM-LOGO.PNG" alt="SKP BM Logo" />
         <div className="date">{currentTime.split(" ")[0]}</div>
         <div className="time">{currentTime.split(" ").slice(1).join(" ")}</div>
       </div>
