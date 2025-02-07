@@ -59,7 +59,7 @@
 
 .now-serving-horizontal .queue-number {
     margin-top: 0;
-    font-size: 380px;
+    font-size: 360px;
     /* color: #d32f2f; */
     /* color: #ff9900; */
     color: hsl(56, 100%, 87%);
@@ -137,11 +137,11 @@
     padding: 10px 0;
     font-weight: bold;
     /* color: #4caf50 */
-    color: #ede570
+    color: #938e8e
 }
 
 
-/* Align All Section Headers */
+/* Align Section Headers */
 /* Waiting (Menunggu) & Completed (Selesai) */
 .waiting-left-side h2,
 .completed-right-side h2 {
@@ -150,3 +150,13 @@
     padding: 10px 0;
     font-weight: bold;
 }
+
+.waiting-left-side h3,
+.completed-right-side h3 {
+    margin: 0;
+    font-size: 30px;
+    padding: 10px 0;
+    font-weight: bold;
+    color: #696969
+}
+

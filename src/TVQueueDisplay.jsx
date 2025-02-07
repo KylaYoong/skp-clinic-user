@@ -136,7 +136,7 @@ const TVQueueDisplay = () => {
         <div className="horizontal-section">
           <div className="now-serving-horizontal">
             <h2>Current Queue Number</h2>
-            <h3>Nombor Giliran Sekarang</h3>=
+            <h3>Nombor Giliran Sekarang</h3>
             <div className="queue-number">
               {currentServing ? currentServing.queueNumber : "None"}
             </div>
@@ -146,7 +146,8 @@ const TVQueueDisplay = () => {
         <div className="waiting-completed">
           <div className="waiting-left-side">
           <div className="waiting-section">
-            <h2>Menunggu</h2>
+            <h2>Now Waiting</h2>
+            <h3>Tunggu Giliran</h3>
             {Array.isArray(upcomingPatients) && upcomingPatients.length > 0 &&
               upcomingPatients.map((patient) => (
                 <div key={patient.id} className="queue-item">
@@ -159,7 +160,8 @@ const TVQueueDisplay = () => {
 
           <div className="completed-right-side">
           <div className="completed-section">
-            <h2>Selesai</h2>
+            <h2>Completed</h2>
+            <h3>Selesai</h3>
             {Array.isArray(completedPatients) && completedPatients.length > 0 &&
               completedPatients.map((patient) => (
                 <div key={patient.id} className="completed-item">
