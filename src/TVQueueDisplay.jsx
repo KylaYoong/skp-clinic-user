@@ -107,13 +107,19 @@ const TVQueueDisplay = () => {
   // Listen for announcements and play the sound
   useEffect(() => {
     const announcementDocRef = doc(db, "announcements", "latest");
-    
+  
     const unsubscribe = onSnapshot(announcementDocRef, (doc) => {
       if (doc.exists()) {
-        const { queueNo } = doc.data();
+        const { queueNo, action } = doc.data(); // Add 'action' to distinguish calls
         if (queueNo) {
-          announceQueueNumber(queueNo); // Play the announcement sound
-          setCurrentServing({ queueNumber: queueNo }); // Update display
+          if (action === "repeat") {
+            // For repeat call, just re-announce the current queue number
+            announceQueueNumber(queueNo);
+          } else if (action === "callNext") {
+            // For call next patient, update the current serving number and announce
+            announceQueueNumber(queueNo);
+            setCurrentServing({ queueNumber: queueNo });
+          }
         } else {
           setCurrentServing(null); // Reset if no announcement
         }
@@ -122,6 +128,7 @@ const TVQueueDisplay = () => {
   
     return () => unsubscribe();
   }, []);
+  
   
   
 
