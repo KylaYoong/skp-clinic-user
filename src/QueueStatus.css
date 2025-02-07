@@ -94,5 +94,6 @@
     font-size: 20px; /* Ensures consistent font size */
     font-weight: bold;
     color: #000000;
+    display: inline;
   }
   
